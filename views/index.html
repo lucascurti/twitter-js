@@ -34,7 +34,8 @@
   <div class="col-md-9">
 
     <!-- display tweets here -->
-    <div class="list-group">
+    <div class="list-group"
+         id="lista">
       {% for tweet in tweets %}
       <a href="/tweets/{{tweet.id}}"
          class="list-group-item">

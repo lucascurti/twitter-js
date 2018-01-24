@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const socketio = require('socket.io');
 
 const app = express(); // crea una instancia de una aplicación de express
 app.set('view engine', 'html'); // hace que res.render funcione con archivos html
@@ -18,8 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use('/', routes);
-
 // app.use('/special', function(req, res, next) {
 //   // haz tu logueo aquí
 //   console.log('haz llegado al area magica');
@@ -32,4 +31,7 @@ app.use('/', routes);
 //   res.render('index', { title: 'Hall of Fame', people: people });
 // });
 
-app.listen(3000);
+const server = app.listen(3000);
+var io = socketio.listen(server);
+
+app.use('/', routes(io));
