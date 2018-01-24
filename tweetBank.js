@@ -1,12 +1,12 @@
 const _ = require('lodash');
 
 var data = [
-  { name: 'Meli', content: 'Este es un tweet' },
-  { name: 'Meli', content: 'Este es otro tweet mas largo' }
+  { name: 'Meli', content: 'Este es un tweet', id: 0 },
+  { name: 'Meli', content: 'Este es otro tweet mas largo', id: 1 }
 ];
 
 function add(name, content) {
-  data.push({ name: name, content: content });
+  data.push({ name: name, content: content, id: data.length });
 }
 function list() {
   return _.cloneDeep(data);

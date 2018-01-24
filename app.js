@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
+var bodyParser = require('body-parser');
 
 const app = express(); // crea una instancia de una aplicación de express
 app.set('view engine', 'html'); // hace que res.render funcione con archivos html
@@ -10,6 +11,12 @@ app.engine('html', nunjucks.render); // cuando le den archivos html a res.render
 nunjucks.configure('views', { noCache: true });
 
 app.use(morgan('tiny'));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use('/', routes);
 
